@@ -1,0 +1,12 @@
+{
+  "name": "repko-films-studio",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "echo 'Run app-specific dev scripts from apps/web, apps/api, or apps/worker.'",
+    "lint": "echo 'No lint configured yet.'"
+  }
+}
