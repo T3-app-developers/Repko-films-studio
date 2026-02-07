@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export type AiPanelsProps = {
   image: {
     preset: string;
@@ -23,9 +25,12 @@ export function AiPanels({ image, video, audit }: AiPanelsProps) {
           <p>Aspect ratio: {image.ratio}</p>
           <p>Seed: {image.seed}</p>
         </div>
-        <button className="mt-4 rounded-full bg-repko-amber px-4 py-2 text-xs font-semibold text-black">
+        <Link
+          href="/ai/image"
+          className="mt-4 inline-flex rounded-full bg-repko-amber px-4 py-2 text-xs font-semibold text-black"
+        >
           Generate image
-        </button>
+        </Link>
       </div>
       <div className="rounded-2xl border border-white/10 bg-black/30 p-6">
         <h3 className="text-lg font-semibold">AI video generation</h3>
@@ -35,9 +40,12 @@ export function AiPanels({ image, video, audit }: AiPanelsProps) {
           <p>Duration: {video.duration}</p>
           <p>FPS: {video.fps}</p>
         </div>
-        <button className="mt-4 rounded-full border border-white/20 px-4 py-2 text-xs text-white/70">
+        <Link
+          href="/ai/video"
+          className="mt-4 inline-flex rounded-full border border-white/20 px-4 py-2 text-xs text-white/70"
+        >
           Queue video job
-        </button>
+        </Link>
       </div>
       <div className="rounded-2xl border border-white/10 bg-black/30 p-6">
         <h3 className="text-lg font-semibold">Audit & policy</h3>

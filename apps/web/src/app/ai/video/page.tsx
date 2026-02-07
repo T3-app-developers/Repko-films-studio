@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
+
 const modes = ["Generate shot", "Enhance footage", "Style transfer"];
 
-const recentVideos = [
+const seedVideos = [
   {
     name: "Bridge insert",
     detail: "Mode: Generate shot · 6 sec · 24fps",
@@ -14,6 +18,22 @@ const recentVideos = [
 ];
 
 export default function AiVideoPage() {
+  const [recentVideos, setRecentVideos] = useState(seedVideos);
+  const [draftCount, setDraftCount] = useState(0);
+
+  const createVideoJob = () => {
+    const nextCount = draftCount + 1;
+    setDraftCount(nextCount);
+    setRecentVideos((current) => [
+      {
+        name: `New video job ${nextCount}`,
+        detail: "Mode: Generate shot · 6 sec · 24fps",
+        status: "Queued",
+      },
+      ...current,
+    ]);
+  };
+
   return (
     <div className="flex flex-col gap-8">
       <header className="rounded-3xl border border-white/10 bg-black/40 p-6">
@@ -49,9 +69,18 @@ export default function AiVideoPage() {
               <span className="rounded-full border border-white/10 px-3 py-1">FPS: 24</span>
             </div>
           </div>
-          <button className="mt-4 rounded-full bg-repko-amber px-4 py-2 text-xs font-semibold text-black">
+          <button
+            type="button"
+            onClick={createVideoJob}
+            className="mt-4 rounded-full bg-repko-amber px-4 py-2 text-xs font-semibold text-black"
+          >
             Create video job
           </button>
+          {draftCount > 0 && (
+            <p className="mt-3 text-xs text-white/50">
+              Job queued. Monitor progress in the jobs queue.
+            </p>
+          )}
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/40 p-5">

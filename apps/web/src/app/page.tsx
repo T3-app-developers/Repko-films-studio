@@ -12,18 +12,21 @@ const jobs: Job[] = [
     type: "proxy_generate",
     status: "running",
     detail: "Generating proxy for Forest_RoughCut.mov",
+    logs: ["ffprobe metadata extracted", "Proxy transcode 72%"],
   },
   {
     id: "job_8399",
     type: "image_generate",
     status: "queued",
     detail: "Prompt: Golden hour establishing shot",
+    logs: ["Queued in image-generate", "Awaiting provider capacity"],
   },
   {
     id: "job_8330",
     type: "export_render",
     status: "succeeded",
     detail: "Export: Trailer_v3.mp4",
+    logs: ["Normalized audio", "Muxed 3 clips", "Export ready"],
   },
 ];
 
@@ -72,9 +75,9 @@ export default function HomePage() {
         title="Evergreen: AI-Enhanced Trailer"
         description="End-to-end workflow dashboard for ingest, jobs, timeline assembly, and export."
         cta={[
-          { label: "New Job", variant: "primary" },
-          { label: "Upload Assets", variant: "secondary" },
-          { label: "Invite Collaborators", variant: "secondary" },
+          { label: "New Job", variant: "primary", href: "/jobs" },
+          { label: "Upload Assets", variant: "secondary", href: "/assets" },
+          { label: "Invite Collaborators", variant: "secondary", href: "/cast" },
         ]}
         stats={[
           { label: "Proxy availability", value: "98%", footnote: "Target reliability" },
