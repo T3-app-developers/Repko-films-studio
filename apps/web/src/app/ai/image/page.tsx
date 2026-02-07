@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const presets = [
   "Cinematic still",
   "Product hero",
@@ -5,7 +9,7 @@ const presets = [
   "Moody monochrome",
 ];
 
-const recentGenerations = [
+const seedGenerations = [
   {
     name: "City dusk concept",
     detail: "Preset: Cinematic still · 16:9 · Seed 30211",
@@ -19,6 +23,22 @@ const recentGenerations = [
 ];
 
 export default function AiImagePage() {
+  const [recentGenerations, setRecentGenerations] = useState(seedGenerations);
+  const [draftCount, setDraftCount] = useState(0);
+
+  const createImageJob = () => {
+    const nextCount = draftCount + 1;
+    setDraftCount(nextCount);
+    setRecentGenerations((current) => [
+      {
+        name: `New still concept ${nextCount}`,
+        detail: "Preset: Cinematic still · 16:9 · Seed auto",
+        status: "Queued",
+      },
+      ...current,
+    ]);
+  };
+
   return (
     <div className="flex flex-col gap-8">
       <header className="rounded-3xl border border-white/10 bg-black/40 p-6">
@@ -54,9 +74,18 @@ export default function AiImagePage() {
               <span className="rounded-full border border-white/10 px-3 py-1">Seed: 30211</span>
             </div>
           </div>
-          <button className="mt-4 rounded-full bg-repko-amber px-4 py-2 text-xs font-semibold text-black">
+          <button
+            type="button"
+            onClick={createImageJob}
+            className="mt-4 rounded-full bg-repko-amber px-4 py-2 text-xs font-semibold text-black"
+          >
             Create image job
           </button>
+          {draftCount > 0 && (
+            <p className="mt-3 text-xs text-white/50">
+              Job queued. Check the jobs tab for live status and logs.
+            </p>
+          )}
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/40 p-5">

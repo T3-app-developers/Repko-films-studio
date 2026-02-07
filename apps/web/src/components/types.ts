@@ -5,6 +5,7 @@ export type Job = {
   type: string;
   status: JobStatus;
   detail: string;
+  logs: string[];
 };
 
 export type Asset = {

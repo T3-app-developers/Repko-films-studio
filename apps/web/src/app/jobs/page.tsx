@@ -7,24 +7,28 @@ const jobs: Job[] = [
     type: "proxy_generate",
     status: "running",
     detail: "Generating proxy for Forest_RoughCut.mov",
+    logs: ["Proxy transcode at 72%", "Audio waveform normalized"],
   },
   {
     id: "job_8399",
     type: "image_generate",
     status: "queued",
     detail: "Prompt: Golden hour establishing shot",
+    logs: ["Queued in image-generate", "Provider warm-up in progress"],
   },
   {
     id: "job_8330",
     type: "export_render",
     status: "succeeded",
     detail: "Export: Trailer_v3.mp4",
+    logs: ["Merged 3 clips", "Export delivered to storage"],
   },
   {
     id: "job_8294",
     type: "video_enhance",
     status: "failed",
     detail: "Color pass failed · retry available",
+    logs: ["Provider error: timeout", "Retry suggested after 10m"],
   },
 ];
 

@@ -1,8 +1,10 @@
+import Link from "next/link";
+
 export type ProjectSummaryProps = {
   title: string;
   description: string;
   stats: Array<{ label: string; value: string; footnote: string }>;
-  cta: Array<{ label: string; variant: "primary" | "secondary" }>;
+  cta: Array<{ label: string; variant: "primary" | "secondary"; href: string }>;
 };
 
 export function ProjectSummary({ title, description, stats, cta }: ProjectSummaryProps) {
@@ -16,8 +18,9 @@ export function ProjectSummary({ title, description, stats, cta }: ProjectSummar
         </div>
         <div className="flex flex-wrap gap-3">
           {cta.map((action) => (
-            <button
+            <Link
               key={action.label}
+              href={action.href}
               className={
                 action.variant === "primary"
                   ? "rounded-full bg-repko-amber px-4 py-2 text-sm font-semibold text-black"
@@ -25,7 +28,7 @@ export function ProjectSummary({ title, description, stats, cta }: ProjectSummar
               }
             >
               {action.label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>
