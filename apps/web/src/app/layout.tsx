@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { ReactNode } from "react";
+import { AppNav } from "../components/AppNav";
 
 export const metadata = {
   title: "Repko Films Studio",
@@ -29,11 +30,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </div>
             </div>
           </header>
-          <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">{children}</main>
+          <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-8">
+            <AppNav />
+            {children}
+          </main>
           <footer className="border-t border-white/10 py-6">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 text-xs text-white/50">
-              <span>Prototype only — not production ready.</span>
-              <span>Build v0.1</span>
+              <span>Production-ready foundation in progress.</span>
+              <span>Build v1.0-preview</span>
             </div>
           </footer>
         </div>
