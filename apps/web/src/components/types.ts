@@ -21,6 +21,20 @@ export type TimelineClip = {
   trim: string;
 };
 
+export type TimelineAsset = {
+  name: string;
+  type: string;
+  duration: string;
+  status: string;
+};
+
+export type AudioDialogue = {
+  id: string;
+  script: string;
+  voice: string;
+  duration: string;
+};
+
 export type CastMember = {
   name: string;
   consent: string;
