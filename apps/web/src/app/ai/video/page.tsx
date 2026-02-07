@@ -4,6 +4,12 @@ import { useState } from "react";
 
 const modes = ["Generate shot", "Enhance footage", "Style transfer"];
 
+const providerOptions = [
+  { label: "Google AI Studio (Veo)", href: "https://aistudio.google.com/" },
+  { label: "OpenAI Video", href: "https://platform.openai.com/docs/guides/video" },
+  { label: "Runway", href: "https://runwayml.com/" },
+];
+
 const seedVideos = [
   {
     name: "Bridge insert",
@@ -20,6 +26,7 @@ const seedVideos = [
 export default function AiVideoPage() {
   const [recentVideos, setRecentVideos] = useState(seedVideos);
   const [draftCount, setDraftCount] = useState(0);
+  const [activeProvider, setActiveProvider] = useState(providerOptions[0]?.label ?? "");
 
   const createVideoJob = () => {
     const nextCount = draftCount + 1;
@@ -47,6 +54,23 @@ export default function AiVideoPage() {
       <section className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
           <p className="text-sm font-semibold">Video job setup</p>
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-white/70">
+            <label className="text-white/50" htmlFor="video-provider">
+              Provider
+            </label>
+            <select
+              id="video-provider"
+              className="rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs text-white/70"
+              value={activeProvider}
+              onChange={(event) => setActiveProvider(event.target.value)}
+            >
+              {providerOptions.map((provider) => (
+                <option key={provider.label} value={provider.label}>
+                  {provider.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="mt-4 space-y-3 text-xs text-white/60">
             <div className="rounded-xl border border-white/10 bg-black/60 p-3">
               Slow push-in shot of the studio lobby, soft bloom, 35mm look.
@@ -81,6 +105,19 @@ export default function AiVideoPage() {
               Job queued. Monitor progress in the jobs queue.
             </p>
           )}
+          <div className="mt-4 space-y-2 text-xs text-white/60">
+            {providerOptions.map((provider) => (
+              <a
+                key={provider.label}
+                className="block rounded-lg border border-white/10 px-3 py-2 text-white/70 transition hover:border-white/30"
+                href={provider.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open {provider.label}
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/40 p-5">

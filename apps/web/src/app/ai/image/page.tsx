@@ -9,6 +9,12 @@ const presets = [
   "Moody monochrome",
 ];
 
+const providerOptions = [
+  { label: "Google AI Studio (Imagen)", href: "https://aistudio.google.com/" },
+  { label: "OpenAI Images", href: "https://platform.openai.com/docs/guides/images" },
+  { label: "Stability AI", href: "https://platform.stability.ai/" },
+];
+
 const seedGenerations = [
   {
     name: "City dusk concept",
@@ -25,6 +31,7 @@ const seedGenerations = [
 export default function AiImagePage() {
   const [recentGenerations, setRecentGenerations] = useState(seedGenerations);
   const [draftCount, setDraftCount] = useState(0);
+  const [activeProvider, setActiveProvider] = useState(providerOptions[0]?.label ?? "");
 
   const createImageJob = () => {
     const nextCount = draftCount + 1;
@@ -52,6 +59,23 @@ export default function AiImagePage() {
       <section className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
           <p className="text-sm font-semibold">Prompt builder</p>
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-white/70">
+            <label className="text-white/50" htmlFor="image-provider">
+              Provider
+            </label>
+            <select
+              id="image-provider"
+              className="rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs text-white/70"
+              value={activeProvider}
+              onChange={(event) => setActiveProvider(event.target.value)}
+            >
+              {providerOptions.map((provider) => (
+                <option key={provider.label} value={provider.label}>
+                  {provider.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="mt-4 space-y-3 text-xs text-white/60">
             <div className="rounded-xl border border-white/10 bg-black/60 p-3">
               Golden hour establishing shot of the forest studio, warm fog, anamorphic.
@@ -86,6 +110,19 @@ export default function AiImagePage() {
               Job queued. Check the jobs tab for live status and logs.
             </p>
           )}
+          <div className="mt-4 space-y-2 text-xs text-white/60">
+            {providerOptions.map((provider) => (
+              <a
+                key={provider.label}
+                className="block rounded-lg border border-white/10 px-3 py-2 text-white/70 transition hover:border-white/30"
+                href={provider.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open {provider.label}
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-black/40 p-5">
